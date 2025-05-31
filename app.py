@@ -19,7 +19,7 @@ Draw one or more digits (0–9) in the canvas below and click **Predict** to see
 """)
 
 # --- Load Model ---
-model = load_model("cnn_hackathon_mnist.keras")
+model = load_model("cnn_hackathon_mnist_2.keras")
 
 # --- Drawing Canvas ---
 canvas_result = st_canvas(
@@ -112,7 +112,7 @@ def preprocess_image(img_data):
     st.write(y)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     model.fit(X, y, epochs=5, batch_size=32)
-    model.save("cnn_hackathon_mnist_1.keras")
+    model.save("cnn_hackathon_mnist_updated.keras")
     return predictions, output_img, digit_images
 
 # --- Handle Prediction ---
