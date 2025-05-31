@@ -5,7 +5,7 @@ from keras.models import load_model
 from PIL import Image, ImageOps
 
 # Load model
-model = load_model("cnn_hackathon_mnist.keras")
+model = load_model("cnn_hackathon_mnist_1.keras")
 
 # UI setup
 st.title("🧠 Handwritten Digit Recognizer")
