@@ -19,7 +19,7 @@ Draw one or more digits (0–9) in the canvas below and click **Predict** to see
 """)
 
 # --- Load Model ---
-model = load_model("cnn_hackathon_mnist_1.keras")
+model = load_model("cnn_hackathon_mnist.keras")
 
 # --- Drawing Canvas ---
 canvas_result = st_canvas(
