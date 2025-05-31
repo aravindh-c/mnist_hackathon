@@ -77,8 +77,8 @@ def preprocess_image(img_data):
         confidence = int(np.max(pred) * 100)
         # Inside for loop after prediction
         true_label = st.text_input(f"Label for Digit at ({x},{y})", key=f"label_{x}_{y}")
-        if true_label.isdigit():
-            np.save(f"data/digit_{true_label}_{datetime.datetime.now().timestamp()}.npy", padded_digit)
+        # if true_label.isdigit():
+        #     np.save(f"data/digit_{true_label}_{datetime.datetime.now().timestamp()}.npy", padded_digit)
         
 
         predictions.append((pred_label, confidence, (x, y)))
@@ -87,32 +87,32 @@ def preprocess_image(img_data):
         cv2.rectangle(output_img, (x, y), (x+w, y+h), (255, 0, 0), 1)
         cv2.putText(output_img, f"{pred_label} ({confidence}%)", (x, y-5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1)
-    X = []
-    y = []
-    for file in os.listdir("data"):
-        if file.endswith(".npy"):
-            label = int(file.split("_")[1])
-            img = np.load(os.path.join("data", file))
-            X.append(img)
-            y.append(label)
+    # X = []
+    # y = []
+    # for file in os.listdir("data"):
+    #     if file.endswith(".npy"):
+    #         label = int(file.split("_")[1])
+    #         img = np.load(os.path.join("data", file))
+    #         X.append(img)
+    #         y.append(label)
     
-    X = np.array(X).reshape(-1, 28, 28, 1)
-    X = X.astype("float32") / 255.0
-    y = to_categorical(y, 10)
+    # X = np.array(X).reshape(-1, 28, 28, 1)
+    # X = X.astype("float32") / 255.0
+    # y = to_categorical(y, 10)
     
-    # Model (can match original MNIST structure)
-    model = Sequential([
-        Conv2D(32, (3,3), activation='relu', input_shape=(28,28,1)),
-        MaxPooling2D(),
-        Flatten(),
-        Dense(100, activation='relu'),
-        Dense(10, activation='softmax')
-    ])
-    st.write(X)
-    st.write(y)
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    model.fit(X, y, epochs=5, batch_size=32)
-    model.save("cnn_hackathon_mnist_updated.keras")
+    # # Model (can match original MNIST structure)
+    # model = Sequential([
+    #     Conv2D(32, (3,3), activation='relu', input_shape=(28,28,1)),
+    #     MaxPooling2D(),
+    #     Flatten(),
+    #     Dense(100, activation='relu'),
+    #     Dense(10, activation='softmax')
+    # ])
+    # st.write(X)
+    # st.write(y)
+    # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    # model.fit(X, y, epochs=5, batch_size=32)
+    # model.save("cnn_hackathon_mnist_updated.keras")
     return predictions, output_img, digit_images
 
 # --- Handle Prediction ---
